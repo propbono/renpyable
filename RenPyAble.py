@@ -2,7 +2,15 @@
 import os
 import cProfile
 
-# Pobieranie ścieżki dostępu
+# TODO:: Change all commments to english
+# TODO:: Create config file
+# TODO:: Reorder menu 
+# TODO:: Create real backlog
+# TODO:: Create unit tests
+# TODO:: Add condition to check if filename was alrready changed
+# TODO:: Program the same functionality with using Options and profile it
+
+# Pobieranie ścieżki dostępu 
 current_directory = os.getcwd()
 answer = 0
 file_list = os.listdir(current_directory)
