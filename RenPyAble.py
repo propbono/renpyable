@@ -2,16 +2,6 @@
 import os
 import cProfile
 
-# TODO:: Change all commments to english
-# TODO:: Create config file
-# TODO:: Reorder menu 
-# TODO:: Create real backlog
-# TODO:: Create unit tests
-# TODO:: Add condition to check if filename was alrready changed
-# TODO:: Program the same functionality with using Options and profile it
-# TODO:: Add a .bat file to run script in Windows
-# TODO:: Check in .bat if py lunchuer is installed
-
 # Pobieranie ścieżki dostępu 
 current_directory = os.getcwd()
 answer = 0
