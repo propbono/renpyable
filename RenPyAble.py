@@ -2,10 +2,12 @@
 import os
 import cProfile
 
-# Pobieranie ścieżki dostępu 
+# get current directory (directory where renpyable.py is located) 
 current_directory = os.getcwd()
-answer = 0
+# list of all files in this directory
 file_list = os.listdir(current_directory)
+# global variable for checking while loop
+answer = 0
 
 def create_test_files(number):
 	for i in range(1,number):
@@ -22,33 +24,37 @@ def create_test_files(number):
 		file4 = open(name4,'a')
 		file4.close()
 		
-#######################################################
-#	Funkcja poprawiająca numerowanie plików:		  #
-#		np. 01 zamiast 1                              #
-#		file_list	- lista plików na której          #
-#					  dokonuje się korekta            #
-#		number		- ile cyfr ma miec liczba         #
-#					  2 to 01, 3 to 001 itd.          #
-#######################################################
-def correct_numbers_for(file_list, number):
+#########################################################
+#	Function for repair file numbering					#
+#		i.e. 01 in exchange for 1						#
+#														#
+#		file_list	- the list of files to repair		#
+#		digits		- how many digits will have new		#
+#					  number: 2 - 01, 3 - 001, etc.		#
+#														#
+#########################################################
+def correct_numbers_for(file_list, digits):
 	file_list = os.listdir(current_directory)
 	for f in file_list:
-			replace_number_for_string(f, "FRONT", number)
-			replace_number_for_string(f, "FRONT_K", number)
-			replace_number_for_string(f, "BACK", number)
-			replace_number_for_string(f, "BACK_K" ,number)
+			replace_number_for_string(f, "FRONT", digits)
+			replace_number_for_string(f, "FRONT_K", digits)
+			replace_number_for_string(f, "BACK", digits)
+			replace_number_for_string(f, "BACK_K" ,digits)
 	file_list = os.listdir(current_directory)	
 
-###########################################################
-#	Funkcja pomocnicza zamieniajca nazwę na prawidłową    #
-#		name	-	nazwa pliku z listy file_list         #
-#		string	-	ciąg znaków pomagający określić       #
-#					gdzie znajdyje się numer              #
-#		number	-	liczba cyfr jaką ma mieć numer        #
-###########################################################
-def replace_number_for_string(name, string, number):	
+#############################################################
+#	Helper function which change old name for new name		#
+#	with proper number.										#	
+#															#
+#		name	-	file name from file_list list			#
+#		string	-	a string which are helping to locate	#
+#					number in the file name					#
+#		digits	-	a number of digits in new number		#
+#															#
+#############################################################
+def replace_number_for_string(name, string, digits):	
 	if name.endswith(string, 0, len(name)-4):
-		begin = -4 - len(string) - 1 - number
+		begin = -4 - len(string) - 1 - digits
 		end = -4 - len(string) - 1
 		print("File name: ", name)
 		print("String: ", string)
@@ -57,14 +63,18 @@ def replace_number_for_string(name, string, number):
 		print("Name[begin:end]: ", name[begin:end])
 		print("isdigit(): " , name[begin:end].isdigit())
 		if(not name[begin:end].isdigit()):
-			new_name = name[:begin + 1]+"0"+name[end-number+1:]
+			new_name = name[:begin + 1]+"0"+name[end-digits+1:]
 			print("New Name: ", new_name,"\n")
 			os.rename(name,new_name)
 
-#######################################################################
-#	Funkcja poprawiająca nazwę pliku tak aby poprawnie się sortowały  #
-#		file_list	-	lista plików które mają być poprawione        #
-#######################################################################
+#########################################################################
+#	Function which correct TIFF files name:								#
+#		This function search for file which ends with "FRONT" or 		#
+#		"FRONT_K" string and put before this string letter "A"			#
+#																		#
+#			file_list	-	lit of file to repair						#
+#																		#
+#########################################################################
 def correct_names_for(file_list):
 	file_list = os.listdir(current_directory)
 	for f in file_list:
@@ -73,14 +83,10 @@ def correct_names_for(file_list):
 			os.rename(f,new_name)
 		elif f.endswith("FRONT_K",0,len(f)-4):
 			new_name = f[:-11]+"A"+f[-11:]
-			os.rename(f,new_name)
-			
+			os.rename(f,new_name)	
 	file_list = os.listdir(current_directory)
 
-def aggregateFunctions():
-		correct_numbers_for(file_list, 2)
-		correct_numbers_for(file_list, 3)
-		correct_names_for(file_list)
+		
 
 while (int(answer) < 6):
 	print("Program do korekty nazwy plików.\nWybierz co chcesz zrobić:\n")
@@ -99,7 +105,9 @@ while (int(answer) < 6):
 	elif int(answer) == 3:
 		correct_names_for(file_list)
 	elif int(answer) == 4:
-		cProfile.run('aggregateFunctions()')
+		correct_numbers_for(file_list, 2)
+		correct_numbers_for(file_list, 3)
+		correct_names_for(file_list)
 	elif int(answer) == 5:
-		cProfile.run('create_test_files(200)')
+		create_test_files(200)
 		
