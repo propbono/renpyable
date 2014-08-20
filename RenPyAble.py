@@ -1,6 +1,7 @@
 #!usr/bin/python
 import os
 import cProfile
+import operator #from operator import contains 
 
 # get current directory (directory where renpyable.py is located) 
 current_directory = os.getcwd()
@@ -23,6 +24,13 @@ def create_test_files(number):
 		file3.close()
 		file4 = open(name4,'a')
 		file4.close()
+
+# temporary delete method - run time: 0.274
+def delete_test_files():
+	files = os.listdir(current_directory)
+	for f in files:
+		if(operator.contains(f,"Test_file")):
+			os.remove(f)
 		
 #########################################################
 #	Function for repair file numbering					#
@@ -78,7 +86,13 @@ def replace_number_for_string(name, string, digits):
 def correct_names_for(file_list):
 	file_list = os.listdir(current_directory)
 	for f in file_list:
-		if not f.endswith("AFRONT",0, len(f)-4) or not f.endswith("AFRONT_K",0,len(f)-4):	
+		#if f.endswith("AFRONT",0, len(f)-4): 	# run time: 1 - 0.438, 2 - 0.184
+		#	continue
+		#elif f.endswith("AFRONT_K",0,len(f)-4):
+		#	continue
+		if operator.contains(f,"AFRONT"):			# run time: 1 - 0.314, 2 - 0.115
+			continue
+		else:	
 			if f.endswith("FRONT",0, len(f)-4):
 				new_name = f[:-9]+"A"+f[-9:]
 				os.rename(f,new_name)
@@ -89,14 +103,15 @@ def correct_names_for(file_list):
 
 		
 
-while (int(answer) < 6):
+while (int(answer) < 7):
 	print("Program do korekty nazwy plików.\nWybierz co chcesz zrobić:\n")
 	print("1. Korekta numerów 1 = 01, 2 = 02 itd.")
 	print("2. Korekta numerów 01 = 001, 10 = 010, itd.")
 	print("3. Korekta nazwy FRONT = AFRONT")
 	print("4. Punkty 1, 2, 3 razem")
 	print("5. Wygeneruj pliki testowe")
-	print("6. Wyjście z programu.")
+	print("6. Usun pliki testowe")
+	print("7. Wyjście z programu.")
 	answer = input("Wybieram :")
 	
 	if int(answer) == 1:
@@ -104,11 +119,13 @@ while (int(answer) < 6):
 	elif int(answer) == 2:
 		correct_numbers_for(file_list, 3)
 	elif int(answer) == 3:
-		correct_names_for(file_list)
+		cProfile.run('correct_names_for(file_list)')
 	elif int(answer) == 4:
 		correct_numbers_for(file_list, 2)
 		correct_numbers_for(file_list, 3)
 		correct_names_for(file_list)
 	elif int(answer) == 5:
-		create_test_files(2)
+		create_test_files(2000)
+	elif int(answer) == 6:
+		cProfile.run('delete_test_files()')
 		

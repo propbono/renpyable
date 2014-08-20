@@ -1,3 +1,7 @@
+# TOFO:: Repair - additional A is inserting after second renaming - check conditions
+# TODO:: Repair - because of new name"AFRONT" numbers are inserting in wrong positions create checking conditions "AFRONT" and "AFRONT_K"
+# TODO:: Correct function creating files to create in separate directory
+# TODO:: Cleanup - add function to delete test files
 # TODO:: Create config file
 # TODO:: Reorder menu 
 # TODO:: Create real backlog
