@@ -10,7 +10,7 @@ file_list = os.listdir(current_directory)
 answer = 0
 
 def create_test_files(number):
-	for i in range(1,number):
+	for i in range(1,number+1):
 		name1 = "Test_file_no"+str(i)+"_FRONT.txt"
 		name2 = "Test_file_no"+str(i)+"_FRONT_K.txt"
 		name3 = "Test_file_no"+str(i)+"_BACK.txt"
@@ -78,12 +78,13 @@ def replace_number_for_string(name, string, digits):
 def correct_names_for(file_list):
 	file_list = os.listdir(current_directory)
 	for f in file_list:
-		if f.endswith("FRONT",0, len(f)-4):
-			new_name = f[:-9]+"A"+f[-9:]
-			os.rename(f,new_name)
-		elif f.endswith("FRONT_K",0,len(f)-4):
-			new_name = f[:-11]+"A"+f[-11:]
-			os.rename(f,new_name)	
+		if not f.endswith("AFRONT",0, len(f)-4) or not f.endswith("AFRONT_K",0,len(f)-4):	
+			if f.endswith("FRONT",0, len(f)-4):
+				new_name = f[:-9]+"A"+f[-9:]
+				os.rename(f,new_name)
+			elif f.endswith("FRONT_K",0,len(f)-4):
+				new_name = f[:-11]+"A"+f[-11:]
+				os.rename(f,new_name)	
 	file_list = os.listdir(current_directory)
 
 		
@@ -109,5 +110,5 @@ while (int(answer) < 6):
 		correct_numbers_for(file_list, 3)
 		correct_names_for(file_list)
 	elif int(answer) == 5:
-		create_test_files(200)
+		create_test_files(2)
 		

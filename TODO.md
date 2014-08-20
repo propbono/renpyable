@@ -1,4 +1,3 @@
-# TODO:: Change all commments to english
 # TODO:: Create config file
 # TODO:: Reorder menu 
 # TODO:: Create real backlog
@@ -9,3 +8,4 @@
 # TODO:: If not installed isntall python and python luncher using powershell
 # TODO:: When directory will be added to Config file change bat script
 # TODO:: Read about bat scripting how to check if python is installed
+# TODO:: Change language to english
