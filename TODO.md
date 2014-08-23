@@ -1,5 +1,4 @@
-# TODO:: Repair - because of new name"AFRONT" numbers are inserting in wrong positions create checking conditions "AFRONT" and "AFRONT_K"
-# TODO:: Add condition to check if filename was alrready changed
+# TODO:: Make input field for change numbering option, user can input how many digits must have new number
 # TODO:: Correct function creating files to create in separate directory
 # TODO:: Cleanup - add function to delete test files
 # TODO:: Create config file
