@@ -1,6 +1,5 @@
-# TODO:: Make input field for change numbering option, user can input how many digits must have new number
+# TODO:: Add information about how many files was affected by changes and what changes was made
 # TODO:: Correct function creating files to create in separate directory
-# TODO:: Cleanup - add function to delete test files
 # TODO:: Create config file
 # TODO:: Create real backlog
 # TODO:: Create unit tests
