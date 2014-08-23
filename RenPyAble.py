@@ -60,7 +60,9 @@ def correct_numbers_for(file_list, digits):
 #		digits	-	a number of digits in new number		#
 #															#
 #############################################################
-def replace_number_for_string(name, string, digits):	
+def replace_number_for_string(name, string, digits):
+	if operator.contains(name,"A"+string): string = "A" + string
+		
 	if name.endswith(string, 0, len(name)-4):
 		begin = -4 - len(string) - 1 - digits
 		end = -4 - len(string) - 1
@@ -119,13 +121,13 @@ while (int(answer) < 7):
 	elif int(answer) == 2:
 		correct_numbers_for(file_list, 3)
 	elif int(answer) == 3:
-		cProfile.run('correct_names_for(file_list)')
+		correct_names_for(file_list)
 	elif int(answer) == 4:
 		correct_numbers_for(file_list, 2)
 		correct_numbers_for(file_list, 3)
 		correct_names_for(file_list)
 	elif int(answer) == 5:
-		create_test_files(2000)
+		create_test_files(900)
 	elif int(answer) == 6:
-		cProfile.run('delete_test_files()')
+		delete_test_files()
 		
