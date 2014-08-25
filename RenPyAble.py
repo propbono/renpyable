@@ -43,12 +43,18 @@ def delete_test_files():
 #########################################################
 def correct_numbers_for(file_list, digits):
 	for digit in range(1,int(digits)+1):
+		print("\n############################################################")	
+		print("#	Changing numbers - LOOP NO. ", digit,"			   #")
+		print("############################################################\n\n")
 		file_list = os.listdir(current_directory)
 		for f in file_list:
-				replace_number_for_string(f, "FRONT", digit)
-				replace_number_for_string(f, "FRONT_K", digit)
-				replace_number_for_string(f, "BACK", digit)
-				replace_number_for_string(f, "BACK_K" ,digit)
+			print("	File: ", f)	
+			print("	----------------------------------------------------")
+			replace_number_for_string(f, "FRONT", digit)
+			replace_number_for_string(f, "FRONT_K", digit)
+			replace_number_for_string(f, "BACK", digit)
+			replace_number_for_string(f, "BACK_K" ,digit)
+			print("	----------------------------------------------------\n")
 	file_list = os.listdir(current_directory)		
 
 #############################################################
@@ -62,21 +68,20 @@ def correct_numbers_for(file_list, digits):
 #															#
 #############################################################
 def replace_number_for_string(name, string, digits):
-	if operator.contains(name,"A"+string): string = "A" + string
-		
+	if operator.contains(name,"A"+string): 
+		string = "A" + string
+		print("		Change: No\n")
+			
 	if name.endswith(string, 0, len(name)-4):
 		begin = -4 - len(string) - 1 - digits
 		end = -4 - len(string) - 1
-		print("File name: ", name)
-		print("String: ", string)
-		print("Begin: ", begin)
-		print("End: ", end)
-		print("Name[begin:end]: ", name[begin:end])
-		print("isdigit(): " , name[begin:end].isdigit())
 		if(not name[begin:end].isdigit()):
 			new_name = name[:begin + 1]+"0"+name[end-digits+1:]
-			print("New Name: ", new_name,"\n")
+			print("		Change: Yes")
+			print("		New Name: ", new_name,"\n")
 			os.rename(name,new_name)
+		else:
+			print("		Change: No")
 
 #########################################################################
 #	Function which correct TIFF files name:								#
@@ -88,20 +93,27 @@ def replace_number_for_string(name, string, digits):
 #########################################################################
 def correct_names_for(file_list):
 	file_list = os.listdir(current_directory)
+	print("\n############################################################")	
+	print("#	Changing names - FRONT => AFRONT 		   #")
+	print("############################################################\n\n")
 	for f in file_list:
-		#if f.endswith("AFRONT",0, len(f)-4): 	# run time: 1 - 0.438, 2 - 0.184
-		#	continue
-		#elif f.endswith("AFRONT_K",0,len(f)-4):
-		#	continue
-		if operator.contains(f,"AFRONT"):			# run time: 1 - 0.314, 2 - 0.115
+		print("	File: ", f)	
+		print("	----------------------------------------------------")	
+		if operator.contains(f,"AFRONT") or operator.contains(f,"BACK"):			# run time: 1 - 0.314, 2 - 0.115
+			print("		Change: No\n")
 			continue
 		else:	
 			if f.endswith("FRONT",0, len(f)-4):
 				new_name = f[:-9]+"A"+f[-9:]
 				os.rename(f,new_name)
+				print("		Change: Yes")
+				print("		New Name: ", new_name,"\n")
 			elif f.endswith("FRONT_K",0,len(f)-4):
 				new_name = f[:-11]+"A"+f[-11:]
 				os.rename(f,new_name)	
+				print("		Change: Yes")
+				print("		New Name: ", new_name,"\n")
+		print("	----------------------------------------------------\n")
 	file_list = os.listdir(current_directory)
 
 		
@@ -126,7 +138,7 @@ while (int(answer) < 6):
 		correct_numbers_for(file_list, digits)
 		correct_names_for(file_list)
 	elif int(answer) == 4:
-		create_test_files(900)
+		create_test_files(20)
 	elif int(answer) == 5:
 		delete_test_files()
 		
