@@ -1,3 +1,5 @@
 #!/usr/bin/python
 
-# Configuration file
+# Configuration fV
+
+VERSION = "0.1.0"
