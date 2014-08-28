@@ -24,10 +24,10 @@ answer = 0
 # temporary create method 
 def create_test_files(number, directory):
 	for i in range(1,number+1):
-		name1 = "Test_file_no"+str(i)+"_FRONT.txt"
-		name2 = "Test_file_no"+str(i)+"_FRONT_K.txt"
-		name3 = "Test_file_no"+str(i)+"_BACK.txt"
-		name4 = "Test_file_no"+str(i)+"_BACK_K.txt"
+		name1 = "Test_file_n"+str(i)+"_FRONT.txt"
+		name2 = "Test_file_n"+str(i)+"_FRONT_K.txt"
+		name3 = "Test_file_n"+str(i)+"_BACK.txt"
+		name4 = "Test_file_n"+str(i)+"_BACK_K.txt"
 		file1 = open(directory+name1,'a')
 		file1.close()
 		file2 = open(directory+name2,'a')
@@ -38,11 +38,11 @@ def create_test_files(number, directory):
 		file4.close()
 
 # temporary delete method - run time: 0.274
-def delete_test_files():
-	files = os.listdir(working_directory)
+def delete_test_files(directory):
+	files = os.listdir(directory)
 	for f in files:
 		if(operator.contains(f,"Test_file")):
-			os.remove(f)
+			os.remove(directory+f)
 		
 #########################################################
 #	Function for repair file numbering					#
@@ -91,7 +91,7 @@ def replace_number_for_string(name, string, digits):
 			new_name = name[:begin + 1]+"0"+name[end-digits+1:]
 			print("		Change: Yes")
 			print("		New Name: ", new_name,"\n")
-			os.rename(name,new_name)
+			os.rename(working_directory+name,working_directory+new_name)
 		else:
 			print("		Change: No")
 
@@ -117,12 +117,12 @@ def correct_names_for(file_list):
 		else:	
 			if f.endswith("FRONT",0, len(f)-4):
 				new_name = f[:-9]+"A"+f[-9:]
-				os.rename(f,new_name)
+				os.rename(working_directory+f,working_directory+new_name)
 				print("		Change: Yes")
 				print("		New Name: ", new_name,"\n")
 			elif f.endswith("FRONT_K",0,len(f)-4):
 				new_name = f[:-11]+"A"+f[-11:]
-				os.rename(f,new_name)	
+				os.rename(working_directory+f,working_directory+new_name)	
 				print("		Change: Yes")
 				print("		New Name: ", new_name,"\n")
 		print("	----------------------------------------------------\n")
@@ -153,5 +153,5 @@ while answer < 6:
 	elif answer == 4:
 		create_test_files(20, working_directory)
 	elif answer == 5:
-		delete_test_files()
+		delete_test_files(working_directory)
 		
