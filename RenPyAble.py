@@ -14,6 +14,9 @@ version = config.VERSION
 
 # get directory where TIF files is located (from config.py file)
 working_directory = config.TIF_DIRECTORY
+doa_directory = config.DOA_DIRECTORY
+ppf_directory = config.PPF_DIRECTORY
+pdf_to_ppf_directory = config.PDF_ARCHIVE_DIRECTORY
 
 # list of all files in this directory
 file_list = os.listdir(working_directory)
@@ -128,7 +131,17 @@ def correct_names_for(file_list):
 		print("	----------------------------------------------------\n")
 	file_list = os.listdir(working_directory)
 
-		
+
+def delete_unused_DoA_files(directory):
+    pass
+
+
+def delete_old_ppf_files(directory):
+    pass
+
+
+def delete_old_pdf_to_ppf_files(directory):
+    pass
 
 while answer < 6:
 	print("TIFF name changer v.",version)
@@ -136,9 +149,12 @@ while answer < 6:
 	print("1. Numbers correction i.e. 1 = 1, 2 = 02, 3 = 003 etc.")
 	print("2. Name correction FRONT = AFRONT")
 	print("3. Chain points 1, 2 ")
-	print("4. Generate test files")
-	print("5. Delete test files")
-	print("6. Exit program.")
+print("4. Delete unused *DoA.pdf files")
+print("5. Delete > 2 month-old *.ppf files")
+print("6. Delete > 2 month-old *.pdf to *.ppf files")
+print("7. Generate test files")
+print("8. Delete test files")
+print("9. Exit program.")
 	answer = int(input("Choose : "))
 	
 	if answer == 1:
@@ -150,8 +166,14 @@ while answer < 6:
 		digits = input("How many digits will have new number?: ")
 		correct_numbers_for(file_list, digits)
 		correct_names_for(file_list)
-	elif answer == 4:
+elif answer == 4:
+delete_unused_DoA_files(doa_directory)
+elif answer == 5:
+delete_old_ppf_files(ppf_directory)
+elif answer == 6:
+delete_old_pdf_to_ppf_files(pdf_to_ppf_directory)
+elif answer == 7:
 		create_test_files(20, working_directory)
-	elif answer == 5:
+elif answer == 8:
 		delete_test_files(working_directory)
 		
