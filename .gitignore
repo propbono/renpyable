@@ -48,4 +48,15 @@ Thumbs.db
 .idea/
 __pycache__/
 *.pyc
+
+# Test Files #
+##############
+/tif/*.tif
+/tif/*.tiff
+/ppf/*.ppf
+/pdf/*.pdf
+/doa/*DoA.pdf
+
+
+
 >>>>>>> 13723302ad4c67125949e3dc7b190155fffe83ee
