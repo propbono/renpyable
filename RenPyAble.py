@@ -6,6 +6,7 @@
 
 import os
 import operator
+import datetime
 from config import RealConfig
 from config import FakeConfig
 
@@ -78,7 +79,7 @@ class Renpyable:
 			os.remove(self.doa_directory+doa)
 		
 	# Try to use str.zfill(3) method
-	def correct_numbers_for(self, digits):
+	def correct_numbers(self, digits):
 		"""
 			Try to use str.zfil(3) method
 			Function for repair file numbering					
@@ -101,7 +102,6 @@ class Renpyable:
 				self.replace_number_for_string(f, "BACK_K", digit)
 				print("	----------------------------------------------------\n")
 		
-
 	def replace_number_for_string(self, name, search, digits):
 		"""
 			Helper function which change old name for new name
@@ -127,7 +127,7 @@ class Renpyable:
 			else:
 				print("		Change: No")
 
-	def correct_names_for(self):
+	def correct_names(self):
 		"""
 			Function which correct TIFF files name:						
 			This function search for file which ends with "FRONT" or 	
@@ -166,11 +166,27 @@ class Renpyable:
 
 	def delete_old_ppf_files(self):
 		ppf_file_list = os.listdir(self.ppf_directory)
-		for f in ppf_files_list:
-			print(f)
+		for f in ppf_file_list:
+			modification_date = self.get_modification_time(self.ppf_directory+f)
+			
+			try:
+				today_date = datetime.date.today()
+				delete_treshold_date = datetime.date(today_date.year, today_date.month-1,today_date.day)
+			except:
+				delete_treshold_date = today_date
+				
+			if(modification_date <= delete_treshold_date):
+				print('{0:20} ==> {1} ==> {2} ==> {3}'.format(f, modification_date, delete_treshold_date, "deleted!"))
+				os.remove(self.ppf_directory+f)
 
 	def delete_old_pdf_to_ppf_files(self):
-		pass
+		pdf_to_ppf_file_list = os.listdir(self.pdf_to_ppf_directory)
+		for f in pdf_to_ppf_file_list:
+			print(f)
+			
+	def get_modification_time(self, filename):
+		time = os.path.getmtime(filename)
+		return datetime.date.fromtimestamp(time)
 
 if __name__ == "__main__":
 	# global variable for checking while loop
@@ -195,13 +211,13 @@ if __name__ == "__main__":
 		
 		if answer == 1:
 			digits = input("How many digits will have new number?: ")
-			renpyable.correct_numbers_for(digits)
+			renpyable.correct_numbers(digits)
 		elif answer == 2:
-			renpyable.correct_names_for()
+			renpyable.correct_names()
 		elif answer == 3:
 			digits = input("How many digits will have new number?: ")
-			renpyable.correct_numbers_for(digits)
-			renpyable.correct_names_for()
+			renpyable.correct_numbers(digits)
+			renpyable.correct_names()
 		elif answer == 4:
 			renpyable.delete_unused_DoA_files()
 		elif answer == 5:
