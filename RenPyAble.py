@@ -33,12 +33,22 @@ class Renpyable:
 			Creates neccessary files to test other functions
 			Without messing up real files
 		"""
+		if os.path.exists(self.tif_directory):
+			self.delete_test_files()
+
+		# Create directories for fake test files
+		os.makedirs(self.tif_directory,mode=0o777,exist_ok=True)
+		os.makedirs(self.pdf_to_ppf_directory,mode=0o777,exist_ok=True)
+		os.makedirs(self.ppf_directory,mode=0o777,exist_ok=True)
+		os.makedirs(self.doa_directory,mode=0o777,exist_ok=True)
+
 		for i in range(1, number + 1):
 			# Tif test files
-			name1 = "Tif_Test_file_n" + str(i) + "_FRONT.tif"
-			name2 = "Tif_Test_file_n" + str(i) + "_FRONT_K.tif"
-			name3 = "Tif_Test_file_n" + str(i) + "_BACK.tif"
-			name4 = "Tif_Test_file_n" + str(i) + "_BACK_K.tif"
+			i_string = str(i) # conversion from int to str
+			name1 = "Tif_Test_file_n" + i_string + "_FRONT.tif"
+			name2 = "Tif_Test_file_n" + i_string + "_FRONT_K.tif"
+			name3 = "Tif_Test_file_n" + i_string + "_BACK.tif"
+			name4 = "Tif_Test_file_n" + i_string + "_BACK_K.tif"
 			file1 = open(self.tif_directory + name1, 'a')
 			file1.close()
 			file2 = open(self.tif_directory + name2, 'a')
@@ -49,17 +59,17 @@ class Renpyable:
 			file4.close()
 			
 			# Pdf test files
-			name5 = "Pdf_Test_file_n" + str(i).zfill(3) + ".pdf"
+			name5 = "Pdf_Test_file_n" + i_string.zfill(3) + ".pdf"
 			file5 = open(self.pdf_to_ppf_directory + name5, 'a')
 			file5.close()
 			
 			# Ppf test files
-			name6 = "Ppf_Test_file_n" + str(i).zfill(3) + ".ppf"
+			name6 = "Ppf_Test_file_n" + i_string.zfill(3) + ".ppf"
 			file6 = open(self.ppf_directory + name6, 'a')
 			file6.close()
 			
 			# DoA test files
-			name7 = "Doa_Test_file_n" + str(i).zfill(3) + "_DoA.pdf"
+			name7 = "Doa_Test_file_n" + i_string.zfill(3) + "_DoA.pdf"
 			file7 = open(self.doa_directory + name7, 'a')
 			file7.close()
 				
@@ -77,7 +87,12 @@ class Renpyable:
 			os.remove(self.ppf_directory+ppf)
 		for doa in os.listdir(self.doa_directory):
 			os.remove(self.doa_directory+doa)
-		
+
+		os.removedirs(self.tif_directory)
+		os.removedirs(self.pdf_to_ppf_directory)
+		os.removedirs(self.ppf_directory)
+		os.removedirs(self.doa_directory)
+
 	# Try to use str.zfill(3) method
 	def correct_numbers(self, digits):
 		"""

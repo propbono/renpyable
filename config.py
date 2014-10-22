@@ -1,7 +1,11 @@
 # Configuration file
+import os
+import sys
+
+
 class RealConfig:
 	# Constant to control version of programm
-	VERSION = "0.1.1"
+	VERSION = "0.2.4"
 
 	# Constant to determine where TIFF files are stored
 	TIF_DIRECTORY = 'Q:\\TIFF\\Test\\'
@@ -14,13 +18,9 @@ class FakeConfig:
 	VERSION = "0.2.4"
 
 	# Constant to determine where TIFF files are stored
-	TIF_DIRECTORY = '/home/propbono/Projects/Python/RenPyAble/tif/'	# check and change to this form os.path.dirname(sys.argv[0])
-	PPF_DIRECTORY = '/home/propbono/Projects/Python/RenPyAble/ppf/'	# for compatibility with windows
-	PDF_ARCHIVE_DIRECTORY = '/home/propbono/Projects/Python/RenPyAble/pdf/'
-	DOA_DIRECTORY = '/home/propbono/Projects/Python/RenPyAble/doa/'
+	TIF_DIRECTORY = os.path.dirname(sys.argv[0]) +'/tif/'	# check and change to this form os.path.dirname(sys.argv[0])
+	PPF_DIRECTORY = os.path.dirname(sys.argv[0]) + '/ppf/'	# for compatibility with windows
+	PDF_ARCHIVE_DIRECTORY = os.path.dirname(sys.argv[0]) + '/pdf/'
+	DOA_DIRECTORY = os.path.dirname(sys.argv[0]) + '/doa/'
 	
-	'''
-	def getScriptPath():
-    return os.path.dirname(os.path.realpath(sys.argv[0]))
-	'''
 
