@@ -5,7 +5,7 @@ import sys
 
 class RealConfig:
 	# Constant to control version of programm
-	VERSION = "0.2.4"
+	VERSION = "0.5.5"
 
 	# Constant to determine where TIFF files are stored
 	TIF_DIRECTORY = 'Q:\\TIFF\\Test\\'
@@ -15,7 +15,7 @@ class RealConfig:
 
 class FakeConfig:
 	# Constant to control version of programm
-	VERSION = "0.2.4"
+	VERSION = "0.5.5"
 
 	# Constant to determine where TIFF files are stored
 	TIF_DIRECTORY = os.path.dirname(sys.argv[0]) +'/tif/'	# check and change to this form os.path.dirname(sys.argv[0])
