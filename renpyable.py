@@ -1,6 +1,6 @@
 # renpyable.py - Simple python programm to reneame TIF files 
 # (generated from Trueflow RIP) for better sort ability.
-# Author: propbono
+__author__ = 'propbono'
 # E-mail: propbono@gmail.com
 #
 
