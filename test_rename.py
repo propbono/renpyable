@@ -4,37 +4,6 @@ from rename import Rename
 
 
 class RenameTests(unittest.TestCase):
-    def test_correct_filename_method_should_affect_files_with_tif_extension(self):
-        filename = "test_file.tif"
-        number_of_digits = 2
-        result = Rename.correct_filename(filename,number_of_digits)
-        expected = "tif"
-        self.assertTrue(result, msg="Expected extension: " + expected
-                                + " Actual extension: " + self.extension( result))
-
-    def test_correct_filename_method_should_affect_files_with_tiff_extension(self):
-        filename = "test_file.tiff"
-        number_of_digits = 2
-        result = Rename.correct_filename(filename,number_of_digits)
-        expected = "tiff"
-        self.assertTrue(result,msg="Expected extension: " + expected + " Actual extension: " + self.extension(result))
-
-    def test_correct_filename_method_should_affect_also_files_with_capital_letters(self):
-        filename = "test_file.TIF"
-        number_of_digits = 2
-        result = Rename.correct_filename(filename,number_of_digits)
-        expected = "tif"
-        self.assertEqual(expected, self.extension(result),
-                         msg="Expected extension: " + expected + " Actual extension: " + self.extension(
-                             result))
-
-        filename = "test_file.TIFF"
-        number_of_digits = 2
-        result = Rename.correct_filename(filename,number_of_digits)
-        expected = "tiff"
-        self.assertEqual(expected, self.extension(result),
-                         msg="Expected extension: " + expected + " Actual extension: " + self.extension(
-                             result))
 
     def test_correct_filename_method_should_change_word_FRONT_to_AFRONT(self):
         filename = "Test_File_FOLD1_FRONT.tif"
@@ -70,7 +39,26 @@ class RenameTests(unittest.TestCase):
         expected = "test_file_n002_fold001_back.tif"
         self.assertEqual(expected,result, "The two filenames are not equal")
 
+    def test_correct_filename_method_should_change_numbers_1_20_(self):
+        filename = "1-20.pdf"
+        number_of_digits = 2
+        result = Rename.correct_filename(filename,number_of_digits)
+        expected = "01-20.pdf"
+        self.assertEqual(expected,result, "The two filenames are not equal")
 
+    def test_correct_filename_method_should_change_numbers_01_6_(self):
+        filename = "01-6.pdf"
+        number_of_digits = 2
+        result = Rename.correct_filename(filename,number_of_digits)
+        expected = "01-06.pdf"
+        self.assertEqual(expected,result, "The two filenames are not equal")
+
+    def test_correct_filename_method_should_change_numbers_11_19_(self):
+        filename = "11-19.pdf"
+        number_of_digits = 3
+        result = Rename.correct_filename(filename,number_of_digits)
+        expected = "011-019.pdf"
+        self.assertEqual(expected,result, "The two filenames are not equal")
 
     def extension(self, filename):
         return filename.split('.')[1]
