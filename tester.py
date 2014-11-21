@@ -1,5 +1,6 @@
 import os
 
+
 class Tester:
     @staticmethod
     def create_test_files(directory, number):

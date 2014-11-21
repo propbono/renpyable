@@ -1,5 +1,6 @@
 import re
 
+
 class Rename:
     @staticmethod
     def correct_filename(filename, number_of_digits):
@@ -17,6 +18,5 @@ class Rename:
         if numbers_to_replace:
             unique_numbers_to_replace = set(numbers_to_replace)
             for number in unique_numbers_to_replace:
-                filename = filename.replace(number, number.zfill(
-                                                    number_of_digits))
+                filename = filename.replace(number, number.zfill(number_of_digits))
         return filename
