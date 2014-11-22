@@ -12,6 +12,7 @@ import re
 from config import RealConfig
 from config import FakeConfig
 from tester import Tester
+from rename import Rename
 
 
 class Renpyable:
@@ -52,57 +53,25 @@ class Renpyable:
             Tester.delete_test_files(directory)
 
     def correct_tiff_filenames(self, digits):
-        self._correct_names()
-        self._correct_numbers(digits)
-
-    # Try to use str.zfill(3) method
-    def _correct_numbers(self, digits):
         """
-            Private helper function for repair file numbering
-            i.e. 01 in exchange for 1, 02 in exchange 2 ...
+            Function lit every file in folder TIF_DIRECTORY from config file
+            and of every file execute dunction Rename.correct_filename(name,digits)
+            which changes name acordingly: upcase to smallcase,  word front to afront,
+            numbering convention from 1, 2, 3 to 001, 002, 003 if digits = 3
 
-            digits		- how many digits will have new
-                          number: 2 - 01, 3 - 001, etc.
+            :param digits:
         """
-        tif_file_list = os.listdir(self.tif_directory)
-        for name in tif_file_list:
-            print("	File: ", name)
-            print("	----------------------------------------------------")
-            number = re.search(r'\d+', name).group()
-            new_name = name.replace(number, number.zfill(digits))
-            os.rename(self.tif_directory + name, self.tif_directory + new_name)
-            print("		Change: Yes")
-            print("		New Name: ", new_name, "\n")
-            print("	----------------------------------------------------\n")
+        file_list = os.listdir(self.tif_directory)
+        file_renamed_count = 0
+        file_in_list_count = len(file_list)
+        for name in file_list:
+            new_name =  Rename.correct_filename(name, digits)
+            if name.__ne__(new_name):
+                os.rename(self.tif_directory + name, self.tif_directory + new_name)
+                file_renamed_count += 1
+        print("Files in folder: " + str(file_in_list_count) + "\nFiles changed: " +
+               str(file_renamed_count))
 
-    def _correct_names(self):
-        """
-            Private helper function which correct TIFF files name:
-            This function search for file which ends with "FRONT" or
-            "FRONT_K" string and put before this string letter "A"
-        """
-        tif_file_list = os.listdir(self.tif_directory)
-        print("\n############################################################")
-        print("#	Changing names - FRONT => AFRONT 		   #")
-        print(
-            "############################################################\n\n")
-        for name in tif_file_list:
-            print("	File: ", name)
-            print("	----------------------------------------------------")
-            if operator.contains(name, "AFRONT") or operator.contains(name,
-                                                                      "BACK") or operator.contains(
-                    name, "BACK_K"):  # run time: 1 - 0.314, 2 - 0.115
-                print("		Change: No\n")
-                continue
-            elif operator.contains(name, "FRONT"):
-                new_name = name.replace("FRONT", "AFRONT")
-                os.rename(self.tif_directory + name,
-                          self.tif_directory + new_name)
-                print("		Change: Yes")
-                print("		New Name: ", new_name)
-            print("	----------------------------------------------------\n")
-
-    # Here i must use os.walk()
     def delete_unused_doa_files(self):
         pass
 
