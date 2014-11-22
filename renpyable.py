@@ -1,5 +1,5 @@
 # renpyable.py - Simple python programme to rename TIF files
-# (generated from Trueflow RIP) for better sort ability.
+# (generated for Trueflow RIP) for better sort ability.
 __author__ = 'propbono'
 # E-mail: propbono@gmail.com
 #
@@ -74,7 +74,6 @@ class Renpyable:
 
     def delete_unused_doa_files(self):
         pass
-
     # tif_file_list = os.listdir(directory)
     # for f in tif_file_list:
     # print()
