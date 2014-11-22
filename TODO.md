@@ -1,4 +1,3 @@
-☐ TODO:: Create unit tests -> desiganted to Test branch
 ☐ TODO:: Check in .bat if py lunchuer is installed
     ☐ TODO:: If not installed isntall python and python luncher using powershell
     ☐ TODO:: Read about bat scripting how to check if python is installed
@@ -6,3 +5,12 @@ TODO:: Add other functionality:
     -   Deleting neccessary *DoA.pdf files - directory in config.py (clean working directory)
     -   Deleting > 2 month-old *.ppf files - directory in config.py (clean ppf archive)
     -   Deleting > 2 month-old *.pdf files neccessary to create *.ppf files - directory in config.py (Clean pdf archive)
+
+TODO:: Integrate class Rename with Renpyable
+TODO:: Delete method correct_pdf_files from Renpyable <-- no longer necessary
+TODO:: Write documentation in README.md
+TODO:: Add integration tests with lettuce to test functionality in Renpyable.py
+    -   for method correct files <-backward
+    -   for method create and delete test files <-backward
+    -   for new not implemented method -> forward
+TODO:: Add unit test for new not implemented method
