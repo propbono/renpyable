@@ -109,24 +109,6 @@ class Renpyable:
         time = os.path.getmtime(filename)
         return datetime.date.fromtimestamp(time)
 
-    # delete this - after refactoring with Rename class
-    def correct_pdf_filenames(self, digits):
-        """
-            Implement listening option, and hotfloders
-            You copy files to hotfolder i.e. pdf_in
-            The are processed there and after finished they are copied to pdf_out
-
-            Corrects pdf chunk files from clients,
-            and preparing them for binding. <-- bad word
-            i.e. 1_time.pdf, 20_movies.pdf
-            will change to: 001_time.pdf and 020_movies.pdf
-        """
-        for name in pdf_file_list:
-            if name.endswith('pdf') or name.endswith("PDF"):
-                number = re.search(r'\d+', name).group()
-                new_name = name.replace(number, number.zfill(3))
-                os.rename(name, new_name)
-
 
 if __name__ == "__main__":
     # global variable for checking while loop
