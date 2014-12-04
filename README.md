@@ -90,3 +90,17 @@ After this operations when we try to merge our files in Acrobat whe have very di
 
 
 # How to use it
+
+For now there are no any installer or graphical interface. To use this program you will need to do a couple of things.
+
+* First of all you will need to have  python 3.2 or later installed
+* Next you need to clone repository to some folder on your disk
+  'git clone "https://github.com/propbono/renpyable.git"'
+  or just download a zip package and extract files to some folder.
+  'https://github.com/propbono/renpyable/archive/master'
+* After that you need to copy a file "start.bat" to your desktop and edit it
+* In "start.bat" you must set a full path to "renpyable.py" file.
+* The last thing is to set up a path to folder when you are keepin tiff files. You set this up in "config.py" file
+
+After that when you double click on start.bat program will run and will change names for all files in declared 
+earlier folder.
