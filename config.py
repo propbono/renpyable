@@ -24,5 +24,5 @@ class FakeConfig:
         sys.argv[0]) + '/ppf/'  # for compatibility with windows
     PDF_ARCHIVE_DIRECTORY = os.path.dirname(sys.argv[0]) + '/pdf/'
     DOA_DIRECTORY = os.path.dirname(sys.argv[0]) + '/doa/'
-	
+
 

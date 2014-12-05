@@ -5,7 +5,7 @@ class Tester:
     @staticmethod
     def create_test_files(directory, number):
         """
-		Creates test files in proper directories defined in config file
+        Creates test files in proper directories defined in config file
         :param directory:
         :param number:
         """
@@ -37,7 +37,7 @@ class Tester:
     @staticmethod
     def delete_test_files(directory):
         """
-		Deletes test files from directory
+        Deletes test files from directory
         :param directory:
         """
         for file in os.listdir(directory):
